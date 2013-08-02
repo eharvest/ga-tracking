@@ -1,0 +1,33 @@
+<script> 
+jQuery(document).ready(function(){ 
+function hasWhiteSpace(formFields) {
+  if( formFields.indexOf(' ') >= 0) {
+  return true;
+  }else{
+	return false;
+  }
+}
+
+function validateEmail(emailAdd) { 
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(emailAdd);
+} 
+
+jQuery('.submit').click(function(){ 
+var name=jQuery('#fm_name').val();
+var email=jQuery('#fm_email').val();
+var subject=jQuery('#fm_subject').val();
+var message=jQuery('#fm_message').val();
+
+if (name=='' || hasWhiteSpace(email) || !(validateEmail(email)) || subject=='' || message=='') {
+//alert("form validation failed");
+return true;
+}
+else { 
+dataLayer.push({ 'event':'submitContactForm', 'eventCategory':'Contact Us', 'eventAction':'Submit Contact Form', 'eventLabel': subject, 'eventValue' : '1'});
+//alert("validation successful"); 
+return true;
+}
+}); 
+}); 		
+</script>
